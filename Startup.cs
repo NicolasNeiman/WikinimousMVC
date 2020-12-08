@@ -55,7 +55,7 @@ namespace WikinimousMVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Post}/{action=Index}/{id?}");
+                    pattern: "{controller=Posts}/{action=Index}/{id?}");
             });
         }
     }

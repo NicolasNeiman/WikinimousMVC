@@ -20,13 +20,7 @@ namespace WikinimousMVC.Controllers
             _context = context;
         }
 
-        private readonly ILogger<PostsController> _logger;
-
-        public PostsController(ILogger<PostsController> logger)
-        {
-            _logger = logger;
-        }
-
+        // GET: Movies
         public async Task<IActionResult> Index()
         {
             return View(await _context.Post.ToListAsync());
