@@ -5,22 +5,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using WikinimousMVC.Models;
+using WikinimousMVC.Data;
 
 namespace WikinimousMVC.Controllers
 {
-    public class PostController : Controller
+    public class PostsController : Controller
     {
-        private readonly ILogger<PostController> _logger;
+        private readonly WikinimousMVCContext _context;
 
-        public PostController(ILogger<PostController> logger)
+        public PostsController(WikinimousMVCContext context)
+        {
+            _context = context;
+        }
+
+        private readonly ILogger<PostsController> _logger;
+
+        public PostsController(ILogger<PostsController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.Post.ToListAsync());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

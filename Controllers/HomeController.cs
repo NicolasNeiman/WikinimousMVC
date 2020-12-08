@@ -19,7 +19,7 @@ namespace WikinimousMVC.Controllers
         }
 
         public IActionResult Index()
-        {
+        {  
             return View();
         }
 
