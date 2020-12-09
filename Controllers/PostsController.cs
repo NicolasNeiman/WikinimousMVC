@@ -20,10 +20,26 @@ namespace WikinimousMVC.Controllers
             _context = context;
         }
 
-        // GET: Movies
+        // GET: Posts
         public async Task<IActionResult> Index()
         {
             return View(await _context.Post.ToListAsync());
+        }
+
+        // GET: Posts/2
+        public async Task<IActionResult> View(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var post = await _context.Post
+                .FirstOrDefaultAsync(p => p.Id == id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return View(post);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

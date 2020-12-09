@@ -5,10 +5,15 @@
 @{
     ViewData["Title"] = "Index";
 }
+
 <div class="container px-5 mx-5">
 @foreach(var post in Model) {
   <div class="post">
-      <h2>@Html.DisplayFor(modelItem => post.Title)</h2>
+      <h2>
+        <a asp-action="View" asp-route-id="@post.Id">
+          @Html.DisplayFor(modelItem => post.Title)
+        </a>
+      </h2>
       <p>@Html.DisplayFor(modelItem => post.Content)</p>
   </div>
 }
