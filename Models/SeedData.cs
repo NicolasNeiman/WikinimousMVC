@@ -15,12 +15,12 @@ namespace WikinimousMVC.Models
                     DbContextOptions<WikinimousMVCContext>>()))
             {
                 // Look for any Posts.
-                if (context.Post.Any())
+                if (context.Posts.Any())
                 {
                     return;   // DB has been seeded
                 }
 
-                context.Post.AddRange(
+                context.Posts.AddRange(
                     new Post
                     {
                         Title = "Apple goes bankrupt",

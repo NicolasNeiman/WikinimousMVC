@@ -42,7 +42,7 @@ namespace WikinimousMVC.Controllers
         // GET: /Posts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Post.ToListAsync());
+            return View(await _context.Posts.ToListAsync());
         }
 
         // GET: /Posts/2
@@ -52,7 +52,7 @@ namespace WikinimousMVC.Controllers
             {
                 return NotFound();
             }
-            var post = await _context.Post
+            var post = await _context.Posts
                 .FirstOrDefaultAsync(p => p.Id == id);
             if (post == null)
             {
@@ -68,7 +68,7 @@ namespace WikinimousMVC.Controllers
             {
                 return NotFound();
             }
-            var post = _context.Post.Find(id);
+            var post = _context.Posts.Find(id);
             if (post == null)
             {
                 return NotFound();
@@ -99,7 +99,7 @@ namespace WikinimousMVC.Controllers
             {
                 return NotFound();
             }
-            var post = await _context.Post
+            var post = await _context.Posts
                 .FirstOrDefaultAsync(p => p.Id == id);
             if (post == null)
             {
