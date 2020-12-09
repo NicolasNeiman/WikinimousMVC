@@ -1,11 +1,13 @@
- @model IEnumerable<WikinimousMVC.Models.Post>
+<link href="~/css/index.css" rel="stylesheet" type="text/css">
+
+@model IEnumerable<WikinimousMVC.Models.Post>
 
 @{
     ViewData["Title"] = "Index";
 }
-<div class="container">
+<div class="container px-5 mx-5">
 @foreach(var post in Model) {
-  <div class="row">
+  <div class="post">
       <h2>@Html.DisplayFor(modelItem => post.Title)</h2>
       <p>@Html.DisplayFor(modelItem => post.Content)</p>
   </div>
