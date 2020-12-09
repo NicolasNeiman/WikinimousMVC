@@ -20,13 +20,13 @@ namespace WikinimousMVC.Controllers
             _context = context;
         }
 
-        // GET: Posts
+        // GET: /Posts
         public async Task<IActionResult> Index()
         {
             return View(await _context.Post.ToListAsync());
         }
 
-        // GET: Posts/2
+        // GET: /Posts/2
         public async Task<IActionResult> View(int? id)
         {
             if (id == null)
@@ -38,6 +38,26 @@ namespace WikinimousMVC.Controllers
             if (post == null)
             {
                 return NotFound();
+            }
+            return View(post);
+        }
+
+        //GET: /New
+        public IActionResult New()
+        {
+            return View();
+        }
+
+        //POST: /Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Title,PostDate,Content")] Post post)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(post);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(post);
         }

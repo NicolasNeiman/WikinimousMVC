@@ -24,6 +24,10 @@ a {
   border-color: #1861ac;
 }
 
+.navbar-nav {
+  justify-content: flex-end;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
