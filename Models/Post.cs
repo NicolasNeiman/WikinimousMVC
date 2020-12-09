@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace WikinimousMVC.Models
 {
@@ -11,5 +12,7 @@ namespace WikinimousMVC.Models
         [DataType(DataType.Date)]
         public DateTime PostDate { get; set; }
         public string Content { get; set; }
+
+        public List<Comment> Comments { get; set; }
     }
 }
