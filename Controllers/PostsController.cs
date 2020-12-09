@@ -19,6 +19,25 @@ namespace WikinimousMVC.Controllers
         {
             _context = context;
         }
+        //GET: /New
+        public IActionResult New()
+        {
+            return View();
+        }
+
+        //POST: /Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Title,PostDate,Content")] Post post)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(post);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(post);
+        }
 
         // GET: /Posts
         public async Task<IActionResult> Index()
@@ -42,25 +61,55 @@ namespace WikinimousMVC.Controllers
             return View(post);
         }
 
-        //GET: /New
-        public IActionResult New()
+        // GET: Posts/Edit/6
+        public IActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var post = _context.Post.Find(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return View(post);
         }
 
-        //POST: /Create
+        //POST: Posts/Update/6
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,PostDate,Content")] Post post)
+        public async Task<IActionResult> Update([Bind("Id,Title,PostDate,Content")] Post post)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(post);
+                _context.Update(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(post);
+        }     
+
+        // DELETE: /Delete/3
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Destroy(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var post = await _context.Post
+                .FirstOrDefaultAsync(p => p.Id == id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            _context.Remove(post);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
