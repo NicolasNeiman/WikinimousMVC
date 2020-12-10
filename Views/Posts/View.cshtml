@@ -5,6 +5,10 @@
   <p>@Html.DisplayFor(model => model.Content)</p>
   <div class="d-fex">
     <div class="d-inline-flex">
+      <a asp-controller="Comments" asp-action="New" asp-route-id="@Model.Id"
+        class="btn btn-success">Add a comment</a>
+    </div>    
+    <div class="d-inline-flex">
       <a asp-action="Edit" asp-route-id="@Model.Id"
         class="btn btn-primary">Edit</a>
     </div>
